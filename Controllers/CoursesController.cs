@@ -48,7 +48,8 @@ namespace VirtualSchool.Controllers
         }
 
         // GET: Courses/Create
-        public IActionResult Create()
+        [Authorize(Roles = "Enseignant")]
+       public IActionResult Create()
         {
             return View();
         }
@@ -56,6 +57,7 @@ namespace VirtualSchool.Controllers
         // POST: Courses/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Enseignant")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,Description,Level")] Course course)
@@ -70,6 +72,7 @@ namespace VirtualSchool.Controllers
         }
 
         // GET: Courses/Edit/5
+        [Authorize(Roles = "Enseignant")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Courses == null)
@@ -88,6 +91,7 @@ namespace VirtualSchool.Controllers
         // POST: Courses/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Enseignant")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,Level")] Course course)
@@ -121,6 +125,8 @@ namespace VirtualSchool.Controllers
         }
 
         // GET: Courses/Delete/5
+        [Authorize(Roles = "Enseignant")]
+        [Authorize(Roles = "manager")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Courses == null)
@@ -138,7 +144,10 @@ namespace VirtualSchool.Controllers
             return View(course);
         }
 
+
         // POST: Courses/Delete/5
+        [Authorize(Roles = "Enseignant")]
+        [Authorize(Roles = "manager")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -156,7 +165,8 @@ namespace VirtualSchool.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-
+        [Authorize(Roles = "Enseignant")]
+        [Authorize(Roles = "manager")]
         private bool CourseExists(int id)
         {
           return (_context.Courses?.Any(e => e.Id == id)).GetValueOrDefault();

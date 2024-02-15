@@ -284,3 +284,4 @@ C:\Users\DELL\Documents\VirtualSchool\obj\Debug\net6.0\refint\VirtualSchool.dll
 C:\Users\DELL\Documents\VirtualSchool\obj\Debug\net6.0\VirtualSchool.pdb
 C:\Users\DELL\Documents\VirtualSchool\obj\Debug\net6.0\VirtualSchool.genruntimeconfig.cache
 C:\Users\DELL\Documents\VirtualSchool\obj\Debug\net6.0\ref\VirtualSchool.dll
+C:\Users\DELL\Documents\VirtualSchool\bin\Debug\net6.0\Microsoft.AspNet.Identity.Core.dll

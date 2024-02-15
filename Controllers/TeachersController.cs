@@ -12,6 +12,7 @@ using VirtualSchool.Models;
 namespace VirtualSchool.Controllers
 {
     [Authorize]
+    [Authorize(Roles = "manager")]
     public class TeachersController : Controller
     {
         private readonly ApplicationDbContext _context;
