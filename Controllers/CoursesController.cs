@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using VirtualSchool.Data;
 using VirtualSchool.Models;
+
 
 namespace VirtualSchool.Controllers
 {
@@ -165,8 +167,7 @@ namespace VirtualSchool.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-        [Authorize(Roles = "Enseignant")]
-        [Authorize(Roles = "manager")]
+       
         private bool CourseExists(int id)
         {
           return (_context.Courses?.Any(e => e.Id == id)).GetValueOrDefault();

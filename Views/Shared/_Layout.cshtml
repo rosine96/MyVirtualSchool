@@ -36,11 +36,7 @@
                             <li class="nav-item">
                                 <a class="nav-link" asp-controller="Teachers" asp-action="Index" >Teachers</a>
                             </li>
-                        }
-
-
-                        @if (SignInManager.IsSignedIn(User) && User.IsInRole("manager"))
-                        {
+                        
                             <li class="nav-item">
                                 <a class="nav-link" asp-controller="Role" asp-action="Index">Roles</a>
                             </li>

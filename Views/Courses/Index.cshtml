@@ -1,14 +1,18 @@
 ﻿@model IEnumerable<VirtualSchool.Models.Course>
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<Student> SignInManager
 
 @{
     ViewData["Title"] = "Index";
 }
 
 <h1>Our Courses</h1>
-
+ @if (SignInManager.IsSignedIn(User) && User.IsInRole("Enseignant"))
+  {
 <p>
     <a class="btn btn-primary" asp-action="Create">Create New course</a>
 </p>
+  }
 <table class="table">
     <thead>
         <tr>
@@ -36,12 +40,21 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Level)
             </td>
+        @if (SignInManager.IsSignedIn(User) && User.IsInRole("Enseignant"))
+                {
             <td>
                 <a class="btn btn-outline-success" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.Id">Details</a> |
                 <a class="btn btn-outline-warning" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
+                    
+                    </td>
+                }else
+                {
+                   <td>
+                       <a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                    </td>
+                }
+            </tr>
 }
     </tbody>
 </table>
