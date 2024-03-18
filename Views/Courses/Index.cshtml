@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<VirtualSchool.Models.Course>
 @using Microsoft.AspNetCore.Identity
-@inject SignInManager<Student> SignInManager
+@inject SignInManager<ApplicationUser> SignInManager
 
 @{
     ViewData["Title"] = "Index";
@@ -10,7 +10,8 @@
  @if (SignInManager.IsSignedIn(User) && User.IsInRole("Enseignant"))
   {
 <p>
-    <a class="btn btn-primary" asp-action="Create">Create New course</a>
+    <a class="btn btn-primary" asp-action="Create">Create New course</a>|
+        <a class="btn btn-success" asp-controller="Courses" asp-action="GetMyCourses">List Of My Courses</a>
 </p>
   }
 <table class="table">

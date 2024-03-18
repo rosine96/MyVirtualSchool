@@ -1,0 +1,50 @@
+﻿@model IEnumerable<ApplicationUser>
+@using Microsoft.AspNetCore.Identity
+@inject RoleManager<IdentityRole> roleManager
+
+
+@{
+    ViewData["Title"] = "UserList";
+}
+
+<h1>Our Users</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class="table-secondary">
+                <td>
+                    @item.UserName
+                </td>
+                <td>
+
+                    <form asp-controller="Role" asp-action="Assign" method="post">
+                        <input type="hidden" name="userId" value="@item.Id" />
+                        <div class="form-group">
+                            <label>Select Roles:</label>
+                            @foreach (var role in roleManager.Roles)
+                            {
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" name="selectedRoles" value="@role.Name">
+                                    <label class="form-check-label">@role.Name</label>
+                                </div>
+                            }
+                        </div>
+                        <button type="submit" class="btn btn-primary">Assign Roles</button>
+                    </form>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

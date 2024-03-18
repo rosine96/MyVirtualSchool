@@ -2,7 +2,7 @@
 
 namespace VirtualSchool.Models
 {
-    public class Student:IdentityUser
+    public class ApplicationUser:IdentityUser
 
     {
         public string? FirstName { get; set; }

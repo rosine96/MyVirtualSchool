@@ -29,6 +29,15 @@ namespace VirtualSchool.Controllers
                           View(await _context.Teachers.ToListAsync()) :
                           Problem("Entity set 'ApplicationDbContext.Teachers'  is null.");
         }
+        public async Task<IActionResult> GetEnseignantName(string id)
+        {
+            return _context.Teachers != null ?
+                View( await _context.Teachers
+                .FirstOrDefaultAsync(m => m.Id.Equals(id))):
+                Problem("Entity set 'ApplicationDbContext.Teachers'  is null.");
+
+
+        }
 
         // GET: Teachers/Details/5
         public async Task<IActionResult> Details(int? id)

@@ -1,4 +1,6 @@
-﻿@model VirtualSchool.Models.Course
+﻿@using Microsoft.EntityFrameworkCore.Metadata.Internal;
+@using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+@model VirtualSchool.Models.Course
 
 @{
     ViewData["Title"] = "Details";
@@ -22,17 +24,26 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Description)
         </dd>
-        <dt class = "col-sm-2">
+        
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Level)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Level)
         </dd>
         <dt class="col-sm-2">
-            Name of teacher
+            Enseignant
         </dt>
         <dd class="col-sm-10">
-            ngono
+            
+            @if (Model.Teacher != null)
+            {
+                <p> @Model.Teacher.Name</p>
+            }
+            else
+            {
+                <p>Aucun enseignant n'est associé à ce cours.</p>
+            }
         </dd>
     </dl>
 </div>

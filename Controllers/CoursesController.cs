@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using VirtualSchool.Data;
 using VirtualSchool.Models;
+using Microsoft.AspNet.Identity;
 
 
 namespace VirtualSchool.Controllers
@@ -30,6 +31,15 @@ namespace VirtualSchool.Controllers
                           View(await _context.Courses.ToListAsync()) :
                           Problem("Entity set 'ApplicationDbContext.Courses'  is null.");
         }
+        public async Task<IActionResult> GetMyCourses(string id)
+        {
+            return _context.Courses != null ?
+                View("Index",await _context.Courses
+                .Where(m => m.Id.Equals(id)).ToListAsync()):
+                Problem("Entity set 'ApplicationDbContext.Courses'  is null."); 
+                
+                
+           }
 
         // GET: Courses/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -40,7 +50,8 @@ namespace VirtualSchool.Controllers
             }
 
             var course = await _context.Courses
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .Include(c => c.Teacher)
+                .FirstOrDefaultAsync(c => c.Id == id);
             if (course == null)
             {
                 return NotFound();
@@ -128,7 +139,6 @@ namespace VirtualSchool.Controllers
 
         // GET: Courses/Delete/5
         [Authorize(Roles = "Enseignant")]
-        [Authorize(Roles = "manager")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Courses == null)
@@ -149,7 +159,6 @@ namespace VirtualSchool.Controllers
 
         // POST: Courses/Delete/5
         [Authorize(Roles = "Enseignant")]
-        [Authorize(Roles = "manager")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

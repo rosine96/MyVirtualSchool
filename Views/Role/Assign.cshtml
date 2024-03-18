@@ -1,0 +1,34 @@
+﻿@model VirtualSchool.Models.RoleAssign
+
+@{
+    ViewData["Title"] = "Assign";
+}
+
+<h1>Manage Roles</h1>
+
+<form method="post" asp-action="Assign">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        <label for="userId">Select User:</label>
+        <select name="userId" class="form-control">
+            @foreach (var user in Model.Users)
+            {
+                <option value="@user.Id">@user.UserName</option>
+            }
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="selectedRoles">Select Roles:</label>
+        <select name="selectedRoles" class="form-control" multiple>
+            @foreach (var role in Model.Roles)
+            {
+                <option value="@role.Name">@role.Name</option>
+            }
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Assign Roles</button>
+
+    
+</form>

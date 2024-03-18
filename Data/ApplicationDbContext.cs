@@ -4,7 +4,7 @@ using VirtualSchool.Models;
 
 namespace VirtualSchool.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<Student>
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)

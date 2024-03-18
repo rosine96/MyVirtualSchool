@@ -13,11 +13,11 @@ namespace VirtualSchool.Areas.Identity.Pages.Account
 {
     public class ConfirmEmailChangeModel : PageModel
     {
-        private readonly UserManager<Student> _userManager;
-        private readonly SignInManager<Student> _signInManager;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
 
         public ConfirmEmailChangeModel(
-            UserManager<Student> userManager, SignInManager<Student> signInManager)
+            UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -31,7 +31,7 @@ namespace VirtualSchool.Areas.Identity.Pages.Account
         [TempData]
         public string StatusMessage { get; set; }
 
-        public SignInManager<Student> SignInManager => _signInManager;
+        public SignInManager<ApplicationUser> SignInManager => _signInManager;
 
         public async Task<IActionResult> OnGetAsync(string userId, string email, string code)
         {

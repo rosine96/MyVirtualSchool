@@ -8,6 +8,8 @@
 
 <p>
     <a class="btn btn-primary" asp-action="CreateRole">Create New Role</a>
+    <a class="btn btn-primary" asp-action="UserList">Manage Role</a>
+    
 </p>
 <table class="table">
     <thead>
@@ -23,11 +25,11 @@
         {
             <tr class="table-secondary">
                 <td>
-                    @Html.DisplayFor(modelItem => item.Name)
+                    @item.Name
                 </td>
                 <td>
-                    <a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.Id">Details</a> |
                     <a class="btn btn-outline-warning" asp-action="DeleteRole" asp-route-id="@item.Id">Delete</a>
+                    
                 </td>
             </tr>
         }

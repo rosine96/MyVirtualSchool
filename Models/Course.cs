@@ -7,7 +7,7 @@
         public string? Description { get; set; }
         public string? Level { get; set; }
         public Teacher? Teacher { get; set; }
-        public ICollection<Student>? Students { get; set; }
+        public ICollection<ApplicationUser>? Students { get; set; }
 
     }
 }
